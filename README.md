@@ -1,12 +1,6 @@
 <h1 align="center">helpers</h1>
 <p align="center">Copyright 2020 Marek Kobida</p>
 
-```bash
-yarn add https://github.com/marekkobida/helpers
-```
-
----
-
 ## helpers
 
 ```ts
