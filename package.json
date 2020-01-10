@@ -1,4 +1,8 @@
 {
+  "dependencies": {
+    "fp-ts": "^2.4.0",
+    "io-ts": "^2.0.4"
+  },
   "name": "@redred/helpers",
   "version": "1.0.0"
 }
