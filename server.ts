@@ -1,6 +1,7 @@
 export { default as InputValidationError } from './private/types/InputValidationError';
 export { default as isArray } from './private/types/isArray';
 export { default as isBoolean } from './private/types/isBoolean';
+export { default as isFunction } from './private/types/isFunction';
 export { default as isNull } from './private/types/isNull';
 export { default as isNumber } from './private/types/isNumber';
 export { default as isObject } from './private/types/isObject';
