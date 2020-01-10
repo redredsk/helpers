@@ -1,8 +1,5 @@
 import fs from 'fs';
 
-/**
- * await read(path);
- */
 function read(path: string): Promise<string> {
   return new Promise(($, $$) => {
     const readableStream = fs.createReadStream(path);
@@ -10,10 +7,7 @@ function read(path: string): Promise<string> {
     let dataBefore: Array<Buffer> = [];
 
     readableStream.on('data', (data) => {
-      dataBefore = [
-        ...dataBefore,
-        data,
-      ];
+      dataBefore = [...dataBefore, data];
     });
 
     readableStream.on('end', () => {
@@ -22,9 +16,7 @@ function read(path: string): Promise<string> {
       $(dataAfter);
     });
 
-    readableStream.on('error', (error) => {
-      $$(error);
-    });
+    readableStream.on('error', (error) => $$(error));
   });
 }
 

@@ -3,9 +3,6 @@ import { isLeft } from 'fp-ts/lib/Either';
 
 import InputValidationError from './InputValidationError';
 
-/**
- * validateInput(t.string, 'test');
- */
 function validateInput<I extends t.Any>(Input: I, input: t.OutputOf<I>): t.TypeOf<I> {
   const $ = Input.decode(input);
 
