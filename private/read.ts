@@ -7,7 +7,7 @@ function read(path: string): Promise<string> {
     let dataBefore: Array<Buffer> = [];
 
     readableStream.on('data', (data) => {
-      dataBefore = [...dataBefore, data];
+      dataBefore = [ ...dataBefore, data ];
     });
 
     readableStream.on('end', () => {
