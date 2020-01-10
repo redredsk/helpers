@@ -10,6 +10,7 @@ import * as helpers from '@redred/helpers';
 1. [InputValidationError](./private/types/InputValidationError.ts)
 1. [isArray](./private/types/isArray.ts)
 1. [isBoolean](./private/types/isBoolean.ts)
+1. [isFunction](./private/types/isFunction.ts)
 1. [isNull](./private/types/isNull.ts)
 1. [isNumber](./private/types/isNumber.ts)
 1. [isObject](./private/types/isObject.ts)
