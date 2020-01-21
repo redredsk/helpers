@@ -26,6 +26,7 @@ import * as helpers from '@redred/helpers';
 import * as helpers from '@redred/helpers/server';
 ```
 
+1. [createServerRequest](./private/createServerRequest.ts)
 1. [read](./private/read.ts)
 1. [validateInputFromPath](./private/types/validateInputFromPath.ts)
 1. [write](./private/write.ts)
