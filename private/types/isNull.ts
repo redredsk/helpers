@@ -1,4 +1,4 @@
-function isNull($: any): $ is null {
+function isNull ($: any): $ is null {
   return $ === null;
 }
 

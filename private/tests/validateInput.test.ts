@@ -13,7 +13,7 @@ test('Input is not valid.', () => {
 
 test('Input is not valid.', () => {
   try {
-    validateInput(t.type({ test: t.string }), { test: 1 });
+    validateInput(t.type({ test: t.string, }), { test: 1, });
   } catch (error) {
     expect(error).toBeInstanceOf(InputValidationError);
     expect(error.message).toStrictEqual('Input is not valid.\n\n  1. .test');

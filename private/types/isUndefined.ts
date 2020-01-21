@@ -1,4 +1,4 @@
-function isUndefined($: any): $ is undefined {
+function isUndefined ($: any): $ is undefined {
   return $ === undefined;
 }
 

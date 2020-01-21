@@ -1,11 +1,11 @@
 import * as t from 'io-ts';
-import { isLeft } from 'fp-ts/lib/Either';
+import { isLeft, } from 'fp-ts/lib/Either';
 
 import read from '../read';
 
 import InputValidationError from './InputValidationError';
 
-async function validateInputFromPath<I extends t.Any>(Input: I, path: string): Promise<t.TypeOf<I>> {
+async function validateInputFromPath<I extends t.Any> (Input: I, path: string): Promise<t.TypeOf<I>> {
   const input: t.OutputOf<I> = JSON.parse(await read(path));
 
   const $ = Input.decode(input);

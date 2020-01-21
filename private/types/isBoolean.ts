@@ -1,4 +1,4 @@
-function isBoolean($: any): $ is boolean {
+function isBoolean ($: any): $ is boolean {
   return $ === false || $ === true || Object.prototype.toString.call($) === '[object Boolean]';
 }
 

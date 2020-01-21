@@ -1,4 +1,4 @@
-function isNumber($: any): $ is number {
+function isNumber ($: any): $ is number {
   return typeof $ === 'number' || Object.prototype.toString.call($) === '[object Number]';
 }
 

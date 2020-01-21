@@ -1,13 +1,13 @@
 import fs from 'fs';
 
-function read(path: string): Promise<string> {
+function read (path: string): Promise<string> {
   return new Promise(($, $$) => {
     const readableStream = fs.createReadStream(path);
 
     let dataBefore: Array<Buffer> = [];
 
     readableStream.on('data', (data) => {
-      dataBefore = [ ...dataBefore, data ];
+      dataBefore = [ ...dataBefore, data, ];
     });
 
     readableStream.on('end', () => {
