@@ -11,8 +11,6 @@ export interface RequestParameters {
 async function createServerRequest (url: URL | string, parameters: RequestParameters & { as: 'text' }): Promise<string>;
 async function createServerRequest<R> (url: URL | string, parameters: RequestParameters & { as: 'json' }): Promise<R>;
 async function createServerRequest<R> (url: URL | string, parameters: RequestParameters): Promise<R | string> {
-  // await new Promise(($) => setTimeout($, 2500));
-
   if (isString(url)) {
     url = new URL(url, `http://${process.env.ADDRESS}:1338`);
   }
