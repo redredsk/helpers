@@ -1,8 +1,8 @@
 import fs from 'fs';
 
-function read (path: string, e = 'utf8'): Promise<string> {
+function read (path: Buffer | URL | string, encoding = 'utf8'): Promise<string> {
   return new Promise(($, $$) => {
-    const readableStream = fs.createReadStream(path);
+    const readableStream = fs.createReadStream(path, { encoding, });
 
     let dataBefore: Array<Buffer> = [];
 
@@ -11,7 +11,7 @@ function read (path: string, e = 'utf8'): Promise<string> {
     });
 
     readableStream.on('end', () => {
-      const dataAfter = Buffer.concat(dataBefore).toString(e);
+      const dataAfter = Buffer.concat(dataBefore).toString(encoding);
 
       $(dataAfter);
     });
