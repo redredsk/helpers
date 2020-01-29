@@ -2,7 +2,7 @@ import fs from 'fs';
 
 function read (path: Buffer | URL | string, encoding = 'utf8'): Promise<string> {
   return new Promise(($, $$) => {
-    const readableStream = fs.createReadStream(path, { encoding, });
+    const readableStream = fs.createReadStream(path);
 
     let dataBefore: Array<Buffer> = [];
 
