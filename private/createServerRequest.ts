@@ -12,7 +12,7 @@ async function createServerRequest (url: URL | string, parameters: RequestParame
 async function createServerRequest<R> (url: URL | string, parameters: RequestParameters & { as: 'json' }): Promise<R>;
 async function createServerRequest<R> (url: URL | string, parameters: RequestParameters): Promise<R | string> {
   if (isString(url)) {
-    url = new URL(url, `http://${process.env.ADDRESS}:1338`);
+    url = new URL(url, `http://127.0.0.1:1337`);
   }
 
   if (parameters.queries) {
