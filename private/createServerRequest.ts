@@ -8,9 +8,18 @@ export interface RequestParameters {
   queries?: { [name: string]: string };
 }
 
-async function createServerRequest (url: URL | string, parameters: RequestParameters & { as: 'text' }): Promise<string>;
-async function createServerRequest<R> (url: URL | string, parameters: RequestParameters & { as: 'json' }): Promise<R>;
-async function createServerRequest<R> (url: URL | string, parameters: RequestParameters): Promise<R | string> {
+async function createServerRequest(
+  url: URL | string,
+  parameters: RequestParameters & { as: 'text' }
+): Promise<string>;
+async function createServerRequest<R>(
+  url: URL | string,
+  parameters: RequestParameters & { as: 'json' }
+): Promise<R>;
+async function createServerRequest<R>(
+  url: URL | string,
+  parameters: RequestParameters
+): Promise<R | string> {
   if (isString(url)) {
     url = new URL(url, `http://127.0.0.1:1337`);
   }
@@ -33,9 +42,7 @@ async function createServerRequest<R> (url: URL | string, parameters: RequestPar
         return response.text();
       }
     }
-  } catch (error) {
-
-  }
+  } catch (error) {}
 
   throw new Error('Odpoveď zo servera nie je platná.');
 }

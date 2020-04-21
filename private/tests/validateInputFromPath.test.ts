@@ -18,7 +18,10 @@ test('Input is not valid.', async () => {
 test('Input is valid.', async () => {
   expect.assertions(1);
 
-  const $ = await validateInputFromPath(t.type({ version: t.literal('1.0.0'), }), path);
+  const $ = await validateInputFromPath(
+    t.type({ version: t.literal('1.0.0') }),
+    path
+  );
 
-  expect($).toStrictEqual({ version: '1.0.0', });
+  expect($).toStrictEqual({ version: '1.0.0' });
 });

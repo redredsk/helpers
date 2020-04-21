@@ -1,4 +1,4 @@
-function isArray ($: any): $ is any[] {
+function isArray($: any): $ is any[] {
   return Object.prototype.toString.call($) === '[object Array]';
 }
 

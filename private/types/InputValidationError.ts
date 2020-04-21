@@ -1,9 +1,9 @@
 import * as t from 'io-ts';
-import { fold, } from 'fp-ts/lib/Either';
-import { pipe, } from 'fp-ts/lib/pipeable';
+import { fold } from 'fp-ts/lib/Either';
+import { pipe } from 'fp-ts/lib/pipeable';
 
 class InputValidationError<Validation> extends Error {
-  constructor (message: string, validation: t.Validation<Validation>) {
+  constructor(message: string, validation: t.Validation<Validation>) {
     super(message);
 
     this.name = 'InputValidationError';
@@ -19,11 +19,12 @@ class InputValidationError<Validation> extends Error {
     this.message += $;
   }
 
-  paths (validation: t.Validation<Validation>): Array<string> {
+  paths(validation: t.Validation<Validation>): Array<string> {
     return pipe(
       validation,
       fold(
-        (errors) => errors.map((error) => error.context.map(({ key, }) => key).join('.')),
+        (errors) =>
+          errors.map((error) => error.context.map(({ key }) => key).join('.')),
         () => []
       )
     );
