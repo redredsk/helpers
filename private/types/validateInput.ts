@@ -3,11 +3,11 @@ import { isLeft } from 'fp-ts/lib/Either';
 
 import InputValidationError from './InputValidationError';
 
-function validateInput<I extends t.Any>(
-  Input: I,
-  input: t.OutputOf<I>
-): t.TypeOf<I> {
-  const $ = Input.decode(input);
+function validateInput<InputType extends t.Any>(
+  inputType: InputType,
+  input: t.OutputOf<InputType>
+): t.TypeOf<InputType> {
+  const $ = inputType.decode(input);
 
   if (isLeft($)) {
     throw new InputValidationError('Input is not valid.', $);
