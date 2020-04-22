@@ -1,22 +1,21 @@
 import fs from 'fs';
 
-function readFile(path: Buffer | URL | string, encoding = 'utf8'): Promise<string> {
+function readFile(
+  path: Buffer | URL | string,
+  encoding = 'utf8'
+): Promise<string> {
   return new Promise(($, $$) => {
-    const readableStream = fs.createReadStream(path);
+    const readableStream = fs.createReadStream(path, { encoding });
 
-    let dataBefore: Array<Buffer> = [];
+    let data: string = '';
 
-    readableStream.on('data', (data) => {
-      dataBefore = [...dataBefore, data];
-    });
+    readableStream.on('data', ($$$) => (data += $$$));
 
-    readableStream.on('end', () => {
-      const dataAfter = Buffer.concat(dataBefore).toString(encoding);
+    readableStream.on('end', () => $(data));
 
-      $(dataAfter);
-    });
-
-    readableStream.on('error', (error) => $$(error));
+    readableStream.on('error', () =>
+      $$(new Error(`The file "${path}" does not exist.`))
+    );
   });
 }
 
