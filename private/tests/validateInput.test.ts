@@ -1,5 +1,4 @@
 import * as t from 'io-ts';
-
 import InputValidationError from '../types/InputValidationError';
 import validateInput from '../types/validateInput';
 

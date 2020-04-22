@@ -1,7 +1,6 @@
 import * as t from 'io-ts';
-import { isLeft } from 'fp-ts/lib/Either';
-
 import InputValidationError from './InputValidationError';
+import { isLeft } from 'fp-ts/lib/Either';
 
 function validateInput<InputType extends t.Any>(
   inputType: InputType,

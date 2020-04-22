@@ -1,20 +1,23 @@
 import * as t from 'io-ts';
+import InputValidationError from './InputValidationError';
+import readFile from '../readFile';
 import { isLeft } from 'fp-ts/lib/Either';
 
-import readFile from '../readFile';
-
-import InputValidationError from './InputValidationError';
-
-async function validateInputFromFile<InputType extends t.Any>(
-  inputType: InputType,
+async function validateInputFromFile<InputFromFileType extends t.Any>(
+  inputFromFileType: InputFromFileType,
   file: string
-): Promise<t.TypeOf<InputType>> {
-  const input: t.OutputOf<InputType> = JSON.parse(await readFile(file));
+): Promise<t.TypeOf<InputFromFileType>> {
+  const inputFromFile: t.OutputOf<InputFromFileType> = JSON.parse(
+    await readFile(file)
+  );
 
-  const $ = inputType.decode(input);
+  const $ = inputFromFileType.decode(inputFromFile);
 
   if (isLeft($)) {
-    throw new InputValidationError(`Input is not valid.`, $);
+    throw new InputValidationError(
+      `Input from the file "${file}" is not valid.`,
+      $
+    );
   }
 
   return $.right;
