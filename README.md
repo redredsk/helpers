@@ -4,7 +4,7 @@
 ## helpers
 
 ```ts
-import * as helpers from '@redred/helpers';
+import * as helpers from '@redredsk/helpers';
 ```
 
 1. [InputValidationError](./private/types/InputValidationError.ts)
@@ -23,7 +23,7 @@ import * as helpers from '@redred/helpers';
 ## helpers/server
 
 ```ts
-import * as helpers from '@redred/helpers/server';
+import * as helpers from '@redredsk/helpers/server';
 ```
 
 1. [createServerRequest](./private/createServerRequest.ts)

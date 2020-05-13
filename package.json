@@ -3,6 +3,6 @@
     "fp-ts": "^2.5.3",
     "io-ts": "^2.2.1"
   },
-  "name": "@redred/helpers",
+  "name": "@redredsk/helpers",
   "version": "1.0.0"
 }
