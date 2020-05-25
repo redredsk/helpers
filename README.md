@@ -8,6 +8,8 @@ import * as helpers from '@redredsk/helpers';
 ```
 
 1. [InputValidationError](private/types/InputValidationError.ts)
+1. [ServerRequest](private/types/ServerRequest.ts)
+1. [ServerRequestError](private/types/ServerRequestError.ts)
 1. [isArray](private/types/isArray.ts)
 1. [isBoolean](private/types/isBoolean.ts)
 1. [isFunction](private/types/isFunction.ts)

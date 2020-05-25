@@ -1,4 +1,6 @@
 export { default as InputValidationError, } from './private/types/InputValidationError';
+export { default as ServerRequest, } from './private/types/ServerRequest';
+export { default as ServerRequestError, } from './private/types/ServerRequestError';
 export { default as isArray, } from './private/types/isArray';
 export { default as isBoolean, } from './private/types/isBoolean';
 export { default as isFunction, } from './private/types/isFunction';
