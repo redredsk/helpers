@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 import ServerRequestError from './ServerRequestError';
-import validateInput from './validateInput';
+import validateInput from './types/validateInput';
 
 class ServerRequest {
   url: string;
@@ -16,7 +16,7 @@ class ServerRequest {
       return validateInput(responseType, await response.json());
     }
 
-    throw new ServerRequestError('The response is not valid', response);
+    throw new ServerRequestError('The response is not valid.', response);
   }
 
   async text (url: ServerRequest['url']): Promise<string> {
@@ -26,7 +26,7 @@ class ServerRequest {
       return response.text();
     }
 
-    throw new ServerRequestError('The response is not valid', response);
+    throw new ServerRequestError('The response is not valid.', response);
   }
 }
 

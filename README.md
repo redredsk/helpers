@@ -1,15 +1,11 @@
 <h1 align="center">helpers</h1>
 <p align="center">Copyright 2020 Marek Kobida</p>
 
-## helpers
-
-```ts
-import * as helpers from '@redredsk/helpers';
-```
+## client 
 
 1. [InputValidationError](private/types/InputValidationError.ts)
-1. [ServerRequest](private/types/ServerRequest.ts)
-1. [ServerRequestError](private/types/ServerRequestError.ts)
+1. [ServerRequest](private/ServerRequest.ts)
+1. [ServerRequestError](private/ServerRequestError.ts)
 1. [isArray](private/types/isArray.ts)
 1. [isBoolean](private/types/isBoolean.ts)
 1. [isFunction](private/types/isFunction.ts)
@@ -22,11 +18,7 @@ import * as helpers from '@redredsk/helpers';
 
 ---
 
-## helpers/server
-
-```ts
-import * as helpers from '@redredsk/helpers/server';
-```
+## server
 
 1. [mime](private/mime.ts)
 1. [readFile](private/readFile.ts)
