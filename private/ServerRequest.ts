@@ -14,7 +14,7 @@ class ServerRequest {
     this.url = url;
   }
 
-  async delete (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}): Promise<ServerResponse> {
+  delete (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}): Promise<ServerResponse> {
     return this.request(input, { ...init, method: 'DELETE', });
   }
 

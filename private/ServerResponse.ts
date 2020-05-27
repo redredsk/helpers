@@ -25,8 +25,8 @@ class ServerResponse {
     return this.response.formData();
   }
 
-  async json<ResponseType extends t.Any> (responseType: ResponseType): Promise<t.TypeOf<ResponseType>> {
-    return validateInput(responseType, await this.response.json());
+  async json<Type extends t.Any> (type: Type): Promise<t.TypeOf<Type>> {
+    return validateInput(type, await this.response.json());
   }
 
   async text (): Promise<string> {
