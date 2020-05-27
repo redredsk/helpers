@@ -13,6 +13,18 @@ class ServerResponse {
     }
   }
 
+  async arrayBuffer (): Promise<ArrayBuffer> {
+    return this.response.arrayBuffer();
+  }
+
+  async blob (): Promise<Blob> {
+    return this.response.blob();
+  }
+
+  async formData (): Promise<FormData> {
+    return this.response.formData();
+  }
+
   async json<ResponseType extends t.Any> (responseType: ResponseType): Promise<t.TypeOf<ResponseType>> {
     return validateInput(responseType, await this.response.json());
   }
