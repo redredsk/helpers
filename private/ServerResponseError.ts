@@ -3,8 +3,8 @@ import ServerResponse from './ServerResponse';
 class ServerResponseError extends Error {
   serverResponse: ServerResponse;
 
-  constructor (message: string, serverResponse: ServerResponseError['serverResponse']) {
-    super(message);
+  constructor (serverResponse: ServerResponseError['serverResponse']) {
+    super('The response is not valid.');
 
     this.name = 'ServerResponseError';
 

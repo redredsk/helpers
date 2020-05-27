@@ -3,13 +3,13 @@ import ServerResponseError from './ServerResponseError';
 import validateInput from './types/validateInput';
 
 class ServerResponse {
-  private response: Response;
+  private readonly response: Response;
 
   constructor (response: ServerResponse['response']) {
     this.response = response;
 
     if (!this.response.ok) {
-      throw new ServerResponseError('The response is not valid.', this);
+      throw new ServerResponseError(this);
     }
   }
 
