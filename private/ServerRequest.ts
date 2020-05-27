@@ -1,7 +1,10 @@
 import ServerResponse from './ServerResponse';
+import isString from './types/isString';
 
-interface I extends RequestInit {
-  parameters?: Record<string, string>;
+declare global {
+  interface RequestInit {
+    parameters?: Record<string, string>;
+  }
 }
 
 class ServerRequest {
@@ -11,58 +14,62 @@ class ServerRequest {
     this.url = url;
   }
 
-  async delete (url: string, i: Omit<I, 'method'> = {}): Promise<ServerResponse> {
-    return this.request(url, { ...i, method: 'DELETE', });
+  async delete (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}): Promise<ServerResponse> {
+    return this.request(input, { ...init, method: 'DELETE', });
   }
 
-  get (url: string, i: Omit<I, 'method'> = {}): Promise<ServerResponse> {
-    return this.request(url, { ...i, method: 'GET', });
+  get (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}): Promise<ServerResponse> {
+    return this.request(input, { ...init, method: 'GET', });
   }
 
-  head (url: string, i: Omit<I, 'method'> = {}): Promise<ServerResponse> {
-    return this.request(url, { ...i, method: 'HEAD', });
+  head (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}): Promise<ServerResponse> {
+    return this.request(input, { ...init, method: 'HEAD', });
   }
 
-  options (url: string, i: Omit<I, 'method'> = {}): Promise<ServerResponse> {
-    return this.request(url, { ...i, method: 'OPTIONS', });
+  options (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}): Promise<ServerResponse> {
+    return this.request(input, { ...init, method: 'OPTIONS', });
   }
 
-  patch (url: string, body: I['body'], i: Omit<I, 'body' | 'method'> = {}): Promise<ServerResponse> {
-    return this.request(url, { ...i, body, method: 'PATCH', });
+  patch (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}): Promise<ServerResponse> {
+    return this.request(input, { ...init, body, method: 'PATCH', });
   }
 
-  post (url: string, body: I['body'], i: Omit<I, 'body' | 'method'> = {}): Promise<ServerResponse> {
-    return this.request(url, { ...i, body, method: 'POST', });
+  post (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}): Promise<ServerResponse> {
+    return this.request(input, { ...init, body, method: 'POST', });
   }
 
-  put (url: string, body: I['body'], i: Omit<I, 'body' | 'method'> = {}): Promise<ServerResponse> {
-    return this.request(url, { ...i, body, method: 'HEAD', });
+  put (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}): Promise<ServerResponse> {
+    return this.request(input, { ...init, body, method: 'HEAD', });
   }
 
-  async request (url: string, i: I = {}): Promise<ServerResponse> {
-    url = this.a(url, i);
+  async request (input: RequestInfo, init: RequestInit = {}): Promise<ServerResponse> {
+    input = this.test(input, init);
 
     if (process.env.NODE_ENV === 'development') {
-      console.log(this.constructor.name, url, i);
+      console.log(this.constructor.name, input, init);
     }
 
-    const response = await fetch(url, i);
+    const response = await fetch(input, init);
 
     return new ServerResponse(response);
   }
 
-  private a (url: string, i: Omit<I, 'method'> = {}): string {
-    const b = new URL(url, this.url);
+  private test (input: RequestInfo, init: RequestInit = {}): RequestInfo {
+    if (isString(input)) {
+      const url = new URL(input, this.url);
 
-    if (i.parameters) {
-      for (let c in i.parameters) {
-        b.searchParams.set(c, i.parameters[c]);
+      if (init.parameters) {
+        for (let parameter in init.parameters) {
+          url.searchParams.set(parameter, init.parameters[parameter]);
+        }
+
+        delete init.parameters;
       }
 
-      delete i.parameters;
+      return url.toString();
     }
 
-    return b.toString();
+    return input;
   }
 }
 
