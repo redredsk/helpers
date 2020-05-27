@@ -5,7 +5,8 @@
 
 1. [InputValidationError](private/types/InputValidationError.ts)
 1. [ServerRequest](private/ServerRequest.ts)
-1. [ServerRequestError](private/ServerRequestError.ts)
+1. [ServerResponse](private/ServerResponse.ts)
+1. [ServerResponseError](private/ServerResponseError.ts)
 1. [isArray](private/types/isArray.ts)
 1. [isBoolean](private/types/isBoolean.ts)
 1. [isFunction](private/types/isFunction.ts)
