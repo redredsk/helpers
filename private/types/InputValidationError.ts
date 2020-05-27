@@ -3,7 +3,7 @@ import { fold, } from 'fp-ts/lib/Either';
 import { pipe, } from 'fp-ts/lib/pipeable';
 
 class InputValidationError<Validation> extends Error {
-  constructor (message: string, validation: t.Validation<Validation>) {
+  constructor (message: Error['message'], validation: t.Validation<Validation>) {
     super(message);
 
     this.message += '\n';

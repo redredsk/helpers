@@ -3,7 +3,7 @@ import ServerResponse from './ServerResponse';
 class ServerResponseError extends Error {
   readonly serverResponse: ServerResponse;
 
-  constructor (message: ServerResponseError['message'], serverResponse: ServerResponseError['serverResponse']) {
+  constructor (message: Error['message'], serverResponse: ServerResponseError['serverResponse']) {
     super(message);
 
     this.name = 'ServerResponseError';
