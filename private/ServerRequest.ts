@@ -1,6 +1,8 @@
 import ServerResponse from './ServerResponse';
 
-type I = RequestInit & { parameters?: Record<string, string>; };
+interface I extends RequestInit {
+  parameters?: Record<string, string>;
+}
 
 class ServerRequest {
   private readonly url: string;
@@ -9,61 +11,55 @@ class ServerRequest {
     this.url = url;
   }
 
-  async delete (url: string, i: I = {}): Promise<ServerResponse> {
-    const response = await fetch(this.a(url, i.parameters), { ...i, method: 'DELETE', });
-
-    return new ServerResponse(response);
+  async delete (url: string, i: Omit<I, 'method'> = {}): Promise<ServerResponse> {
+    return this.request(url, { ...i, method: 'DELETE', });
   }
 
-  async get (url: string, i: I = {}): Promise<ServerResponse> {
-    const response = await fetch(this.a(url, i.parameters), { ...i, method: 'GET', });
-
-    return new ServerResponse(response);
+  get (url: string, i: Omit<I, 'method'> = {}): Promise<ServerResponse> {
+    return this.request(url, { ...i, method: 'GET', });
   }
 
-  async head (url: string, i: I = {}): Promise<ServerResponse> {
-    const response = await fetch(this.a(url, i.parameters), { ...i, method: 'HEAD', });
-
-    return new ServerResponse(response);
+  head (url: string, i: Omit<I, 'method'> = {}): Promise<ServerResponse> {
+    return this.request(url, { ...i, method: 'HEAD', });
   }
 
-  async options (url: string, i: I = {}): Promise<ServerResponse> {
-    const response = await fetch(this.a(url, i.parameters), { ...i, method: 'OPTIONS', });
-
-    return new ServerResponse(response);
+  options (url: string, i: Omit<I, 'method'> = {}): Promise<ServerResponse> {
+    return this.request(url, { ...i, method: 'OPTIONS', });
   }
 
-  async patch (url: string, body: I['body'], i: I = {}): Promise<ServerResponse> {
-    const response = await fetch(this.a(url, i.parameters), { ...i, body, method: 'PATCH', });
-
-    return new ServerResponse(response);
+  patch (url: string, body: I['body'], i: Omit<I, 'body' | 'method'> = {}): Promise<ServerResponse> {
+    return this.request(url, { ...i, body, method: 'PATCH', });
   }
 
-  async post (url: string, body: I['body'], i: I = {}): Promise<ServerResponse> {
-    const response = await fetch(this.a(url, i.parameters), { ...i, body, method: 'POST', });
-
-    return new ServerResponse(response);
+  post (url: string, body: I['body'], i: Omit<I, 'body' | 'method'> = {}): Promise<ServerResponse> {
+    return this.request(url, { ...i, body, method: 'POST', });
   }
 
-  async put (url: string, body: I['body'], i: I = {}): Promise<ServerResponse> {
-    const response = await fetch(this.a(url, i.parameters), { ...i, body, method: 'PUT', });
-
-    return new ServerResponse(response);
+  put (url: string, body: I['body'], i: Omit<I, 'body' | 'method'> = {}): Promise<ServerResponse> {
+    return this.request(url, { ...i, body, method: 'HEAD', });
   }
 
   async request (url: string, i: I = {}): Promise<ServerResponse> {
-    const response = await fetch(this.a(url, i.parameters), i.parameters);
+    url = this.a(url, i);
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(this.constructor.name, url, i);
+    }
+
+    const response = await fetch(url, i);
 
     return new ServerResponse(response);
   }
 
-  private a (url: string, i: I['parameters'] = {}): string {
+  private a (url: string, i: Omit<I, 'method'> = {}): string {
     const b = new URL(url, this.url);
 
-    if (i) {
-      for (let c in i) {
-        b.searchParams.set(c, i[c]);
+    if (i.parameters) {
+      for (let c in i.parameters) {
+        b.searchParams.set(c, i.parameters[c]);
       }
+
+      delete i.parameters;
     }
 
     return b.toString();
