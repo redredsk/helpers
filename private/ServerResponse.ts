@@ -23,23 +23,23 @@ class ServerResponse {
   }
 
   async arrayBuffer (): Promise<ArrayBuffer> {
-    return this.response.arrayBuffer();
+    return this.response.clone().arrayBuffer();
   }
 
   async blob (): Promise<Blob> {
-    return this.response.blob();
+    return this.response.clone().blob();
   }
 
   async formData (): Promise<FormData> {
-    return this.response.formData();
+    return this.response.clone().formData();
   }
 
   async json<Type extends t.Any> (type: Type): Promise<t.TypeOf<Type>> {
-    return validateInput(type, await this.response.json());
+    return validateInput(type, await this.response.clone().json());
   }
 
   async text (): Promise<string> {
-    return await this.response.text();
+    return await this.response.clone().text();
   }
 }
 
