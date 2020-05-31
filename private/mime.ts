@@ -35,14 +35,18 @@ function mime (extension: string): Type & { typeName: string } {
   for (const typeName in types) {
     const type = types[typeName];
 
-    for (let i = 0; i < type.extensions.length; i += 1) {
-      if (extension === type.extensions[i]) {
+    const typeExtensions = type.extensions;
+
+    for (let i = 0; i < typeExtensions.length; i += 1) {
+      const typeExtension = typeExtensions[i];
+
+      if (typeExtension === extension) {
         return { ...type, typeName, };
       }
     }
   }
 
-  return { extensions: [], typeName: 'text/plain', };
+  return { extensions: [ extension, ], typeName: 'text/plain', };
 }
 
 export default mime;

@@ -11,10 +11,13 @@ class ServerResponse {
 
   readonly url: Response['url'];
 
-  constructor (response: ServerResponse['response']) {
+  constructor (response: Response) {
     this.headers = response.headers;
+
     this.response = response;
+
     this.type = response.type;
+
     this.url = response.url;
 
     if (!response.ok) {
@@ -22,15 +25,15 @@ class ServerResponse {
     }
   }
 
-  async arrayBuffer (): Promise<ArrayBuffer> {
+  arrayBuffer () {
     return this.response.clone().arrayBuffer();
   }
 
-  async blob (): Promise<Blob> {
+  blob () {
     return this.response.clone().blob();
   }
 
-  async formData (): Promise<FormData> {
+  formData () {
     return this.response.clone().formData();
   }
 
@@ -38,8 +41,8 @@ class ServerResponse {
     return validateInput(type, await this.response.clone().json());
   }
 
-  async text (): Promise<string> {
-    return await this.response.clone().text();
+  text () {
+    return this.response.clone().text();
   }
 }
 

@@ -10,35 +10,35 @@ declare global {
 class ServerRequest {
   private readonly url: string;
 
-  constructor (url: ServerRequest['url']) {
+  constructor (url: string) {
     this.url = url;
   }
 
-  delete (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}): Promise<ServerResponse> {
+  delete (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
     return this.request(input, { ...init, method: 'DELETE', });
   }
 
-  get (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}): Promise<ServerResponse> {
+  get (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
     return this.request(input, { ...init, method: 'GET', });
   }
 
-  head (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}): Promise<ServerResponse> {
+  head (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
     return this.request(input, { ...init, method: 'HEAD', });
   }
 
-  options (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}): Promise<ServerResponse> {
+  options (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
     return this.request(input, { ...init, method: 'OPTIONS', });
   }
 
-  patch (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}): Promise<ServerResponse> {
+  patch (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}) {
     return this.request(input, { ...init, body, method: 'PATCH', });
   }
 
-  post (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}): Promise<ServerResponse> {
+  post (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}) {
     return this.request(input, { ...init, body, method: 'POST', });
   }
 
-  put (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}): Promise<ServerResponse> {
+  put (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}) {
     return this.request(input, { ...init, body, method: 'HEAD', });
   }
 
@@ -59,8 +59,8 @@ class ServerRequest {
       const url = new URL(input, this.url);
 
       if (init.parameters) {
-        for (let parameter in init.parameters) {
-          url.searchParams.set(parameter, init.parameters[parameter]);
+        for (let parameterName in init.parameters) {
+          url.searchParams.set(parameterName, init.parameters[parameterName]);
         }
 
         delete init.parameters;

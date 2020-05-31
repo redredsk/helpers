@@ -6,7 +6,7 @@ function readFile (path: Buffer | URL | string, encoding: BufferEncoding = 'utf-
 
     let data: string = '';
 
-    readableStream.on('data', ($$$) => data += $$$);
+    readableStream.on('data', (chunk) => data += chunk);
 
     readableStream.on('end', () => $(data));
 
