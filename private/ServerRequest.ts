@@ -1,4 +1,5 @@
 import ServerResponse from './ServerResponse';
+import ServerResponseError from './ServerResponseError';
 import isString from './types/isString';
 
 declare global {
@@ -45,11 +46,11 @@ class ServerRequest {
   async request (input: RequestInfo, init: RequestInit = {}): Promise<ServerResponse> {
     input = this.test(input, init);
 
-    if (process.env.NODE_ENV === 'development') {
-      console.log(this.constructor.name, input, init);
-    }
-
     const response = await fetch(input, init);
+
+    if (!response.ok) {
+      throw new ServerResponseError(new ServerResponse(response));
+    }
 
     return new ServerResponse(response);
   }

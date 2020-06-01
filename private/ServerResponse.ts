@@ -1,11 +1,14 @@
 import * as t from 'io-ts';
-import ServerResponseError from './ServerResponseError';
 import validateInput from './types/validateInput';
 
 class ServerResponse {
   readonly headers: Response['headers'];
 
   private readonly response: Response;
+
+  readonly status: Response['status'];
+
+  readonly statusText: Response['statusText'];
 
   readonly type: Response['type'];
 
@@ -16,33 +19,33 @@ class ServerResponse {
 
     this.response = response;
 
+    this.status = response.status;
+
+    this.statusText = response.statusText;
+
     this.type = response.type;
 
     this.url = response.url;
-
-    if (!response.ok) {
-      throw new ServerResponseError('The response is not valid.', this);
-    }
   }
 
   arrayBuffer () {
-    return this.response.clone().arrayBuffer();
+    return this.response.arrayBuffer();
   }
 
   blob () {
-    return this.response.clone().blob();
+    return this.response.blob();
   }
 
   formData () {
-    return this.response.clone().formData();
+    return this.response.formData();
   }
 
   async json<Type extends t.Any> (type: Type): Promise<t.TypeOf<Type>> {
-    return validateInput(type, await this.response.clone().json());
+    return validateInput(type, await this.response.json());
   }
 
   text () {
-    return this.response.clone().text();
+    return this.response.text();
   }
 }
 
