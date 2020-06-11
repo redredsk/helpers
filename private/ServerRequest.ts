@@ -1,3 +1,4 @@
+import ServerRequestError from './ServerRequestError';
 import ServerResponse from './ServerResponse';
 import ServerResponseError from './ServerResponseError';
 import isString from './types/isString';
@@ -43,16 +44,20 @@ class ServerRequest {
     return this.request(input, { ...init, body, method: 'HEAD', });
   }
 
-  async request (input: RequestInfo, init: RequestInit = {}): Promise<ServerResponse> {
-    input = this.test(input, init);
+  request (input: RequestInfo, init: RequestInit = {}): Promise<ServerResponse> {
+    return new Promise(($, $$) => {
+      input = this.test(input, init);
 
-    const response = await fetch(input, init);
+      fetch(input, init)
+        .then((response) => {
+          if (!response.ok) {
+            $$(new ServerResponseError(new ServerResponse(response)));
+          }
 
-    if (!response.ok) {
-      throw new ServerResponseError(new ServerResponse(response));
-    }
-
-    return new ServerResponse(response);
+          $(new ServerResponse(response));
+        })
+        .catch(() => $$(new ServerRequestError()));
+    });
   }
 
   private test (input: RequestInfo, init: RequestInit = {}): RequestInfo {
