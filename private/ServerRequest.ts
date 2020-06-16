@@ -10,7 +10,7 @@ declare global {
 }
 
 class ServerRequest {
-  private readonly url: string;
+  readonly url: string;
 
   constructor (url: string) {
     this.url = url;
