@@ -13,6 +13,7 @@ module.exports = ({ types: t, }) => {
 
           if (
             expression.isArrayExpression()
+            || expression.isIdentifier()
             || expression.isNumericLiteral()
             || expression.isObjectExpression()
             || expression.isStringLiteral()

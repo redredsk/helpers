@@ -49,7 +49,7 @@ function $ (...encodedClassNames: EncodedClassName[]): DecodedClassName[] {
   return decodedClassNames;
 }
 
-function decodeClassName (...encodedClassNames: EncodedClassName[]): DecodedClassName {
+function decodeClassName (...encodedClassNames: EncodedClassName[]): DecodedClassName | undefined {
   const decodedClassNames = $(...encodedClassNames);
 
   if (process.env.NODE_ENV !== 'test') {
@@ -62,7 +62,9 @@ function decodeClassName (...encodedClassNames: EncodedClassName[]): DecodedClas
     }
   }
 
-  return decodedClassNames.join(' ');
+  if (decodedClassNames.length > 0) {
+    return decodedClassNames.join(' ');
+  }
 }
 
 export default decodeClassName;
