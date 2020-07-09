@@ -1,3 +1,5 @@
+import css from '@redredsk/design/index.css';
+
 import isArray from './types/isArray';
 import isNumber from './types/isNumber';
 import isObject from './types/isObject';
@@ -52,14 +54,10 @@ function $ (...encodedClassNames: EncodedClassName[]): DecodedClassName[] {
 function decodeClassName (...encodedClassNames: EncodedClassName[]): DecodedClassName | undefined {
   const decodedClassNames = $(...encodedClassNames);
 
-  if (process.env.NODE_ENV !== 'test') {
-    const css = require('@redredsk/design/index.css');
+  for (const i in decodedClassNames) {
+    const decodedClassName = decodedClassNames[i];
 
-    for (const i in decodedClassNames) {
-      if (css[decodedClassNames[i]]) {
-        decodedClassNames[i] = css[decodedClassNames[i]];
-      }
-    }
+    decodedClassNames[i] = css[decodedClassName] || decodedClassName;
   }
 
   if (decodedClassNames.length > 0) {
