@@ -8,8 +8,8 @@ export type DecodedResponsiveClassName = string;
 export type EncodedResponsiveClassName<T extends number | string> =
   | T
   | [ T, ]
-  | [ T, { [breakpointName: string]: T }, ]
-  | { [breakpointName: string]: T };
+  | [ T, { [breakpointName: string]: T; }, ]
+  | { [breakpointName: string]: T; };
 
 function decodeResponsiveClassName ($: string, encodedResponsiveClassName?: EncodedResponsiveClassName<number | string>): DecodedResponsiveClassName[] {
   let decodedResponsiveClassNames: DecodedResponsiveClassName[] = [];

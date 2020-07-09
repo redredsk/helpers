@@ -11,7 +11,7 @@ export type EncodedClassName =
   | number
   | string
   | undefined
-  | { [decodedClassName: string]: boolean | null | undefined };
+  | { [decodedClassName: string]: boolean | null | undefined; };
 
 function $ (...encodedClassNames: EncodedClassName[]): DecodedClassName[] {
   let decodedClassNames: DecodedClassName[] = [];

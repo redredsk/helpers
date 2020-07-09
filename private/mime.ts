@@ -31,7 +31,7 @@ const types: Types = {
   },
 };
 
-function mime (extension: string): Type & { typeName: string } {
+function mime (extension: string): Type & { typeName: string; } {
   for (const typeName in types) {
     const type = types[typeName];
 
