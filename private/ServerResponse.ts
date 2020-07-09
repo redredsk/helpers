@@ -1,4 +1,5 @@
 import * as t from 'io-ts';
+
 import validateInput from './types/validateInput';
 
 class ServerResponse {

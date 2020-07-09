@@ -4,7 +4,7 @@ function readFile (path: Buffer | URL | string, encoding: BufferEncoding = 'utf-
   return new Promise(($, $$) => {
     const readableStream = fs.createReadStream(path, { encoding, });
 
-    let data: string = '';
+    let data = '';
 
     readableStream.on('data', (chunk) => data += chunk);
 

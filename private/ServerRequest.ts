@@ -65,7 +65,7 @@ class ServerRequest {
       const url = new URL(input, this.url);
 
       if (init.parameters) {
-        for (let parameterName in init.parameters) {
+        for (const parameterName in init.parameters) {
           url.searchParams.set(parameterName, init.parameters[parameterName]);
         }
 
