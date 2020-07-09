@@ -53,7 +53,7 @@ function decodeClassName (...encodedClassNames: EncodedClassName[]): DecodedClas
   const decodedClassNames = $(...encodedClassNames);
 
   if (process.env.NODE_ENV !== 'test') {
-    const css = require('../../design/index.css');
+    const css = require('@redredsk/design/index.css');
 
     for (const i in decodedClassNames) {
       if (css[decodedClassNames[i]]) {

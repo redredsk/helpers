@@ -3,17 +3,13 @@ import isNumber from './types/isNumber';
 import isObject from './types/isObject';
 import isString from './types/isString';
 
-type BreakpointName =
-  | '##'
-  | '#';
-
 export type DecodedResponsiveClassName = string;
 
 export type EncodedResponsiveClassName<T extends number | string> =
   | T
   | [ T, ]
-  | [ T, { [breakpointName in BreakpointName]?: T }, ]
-  | { [breakpointName in BreakpointName]?: T };
+  | [ T, { [breakpointName: string]: T }, ]
+  | { [breakpointName: string]: T };
 
 function decodeResponsiveClassName ($: string, encodedResponsiveClassName?: EncodedResponsiveClassName<number | string>): DecodedResponsiveClassName[] {
   let decodedResponsiveClassNames: DecodedResponsiveClassName[] = [];
@@ -26,10 +22,10 @@ function decodeResponsiveClassName ($: string, encodedResponsiveClassName?: Enco
   if (isArray(encodedResponsiveClassName)) {
     addDecodedResponsiveClassName(`${$}${encodedResponsiveClassName[0]}`);
 
-    // [ T, { [breakpointName in BreakpointName]?: T }, ]
+    // [ T, { [breakpointName: string]: T }, ]
     if (isObject(encodedResponsiveClassName[1])) {
       for (const breakpointName in encodedResponsiveClassName[1]) {
-        addDecodedResponsiveClassName(`${breakpointName}${$}${encodedResponsiveClassName[1][breakpointName as BreakpointName]}`);
+        addDecodedResponsiveClassName(`${breakpointName}${$}${encodedResponsiveClassName[1][breakpointName]}`);
       }
     }
   }
@@ -39,10 +35,10 @@ function decodeResponsiveClassName ($: string, encodedResponsiveClassName?: Enco
     addDecodedResponsiveClassName(`${$}${encodedResponsiveClassName}`);
   }
 
-  // { [breakpointName in BreakpointName]?: T }
+  // { [breakpointName: string]: T }
   if (isObject(encodedResponsiveClassName)) {
     for (const breakpointName in encodedResponsiveClassName) {
-      addDecodedResponsiveClassName(`${breakpointName}${$}${encodedResponsiveClassName[breakpointName as BreakpointName]}`);
+      addDecodedResponsiveClassName(`${breakpointName}${$}${encodedResponsiveClassName[breakpointName]}`);
     }
   }
 
