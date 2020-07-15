@@ -7,8 +7,6 @@
 1. [ServerRequest](private/ServerRequest.ts)
 1. [ServerResponse](private/ServerResponse.ts)
 1. [ServerResponseError](private/ServerResponseError.ts)
-1. [decodeClassName](private/decodeClassName.ts)
-1. [decodeResponsiveClassName](private/decodeResponsiveClassName.ts)
 1. [isArray](private/types/isArray.ts)
 1. [isBoolean](private/types/isBoolean.ts)
 1. [isFunction](private/types/isFunction.ts)
