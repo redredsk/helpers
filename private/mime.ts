@@ -21,6 +21,9 @@ const types: Types = {
   'image/png': {
     extensions: [ '.png', ],
   },
+  'image/svg+xml': {
+    extensions: [ '.svg', ],
+  },
   'text/css': {
     charset: 'utf-8',
     extensions: [ '.css', ],
