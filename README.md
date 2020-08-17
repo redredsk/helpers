@@ -28,3 +28,4 @@
 
 1. [readFile](private/readFile.ts)
 1. [writeFile](private/writeFile.ts)
+1. all from [client](#client)
