@@ -41,7 +41,7 @@ class ServerRequest {
   }
 
   put (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}) {
-    return this.request(input, { ...init, body, method: 'HEAD', });
+    return this.request(input, { ...init, body, method: 'PUT', });
   }
 
   request (input: RequestInfo, init: RequestInit = {}): Promise<ServerResponse> {
