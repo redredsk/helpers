@@ -3,8 +3,6 @@
 
 ## client
 
-`import * as helpers from '@redredsk/helpers/private';`
-
 1. [InputValidationError](private/types/InputValidationError.ts)
 1. [ServerRequest](private/ServerRequest.ts)
 1. [ServerResponse](private/ServerResponse.ts)
@@ -24,8 +22,5 @@
 
 ## server
 
-`import * as helpers from '@redredsk/helpers/private/server';`
-
 1. [readFile](private/readFile.ts)
 1. [writeFile](private/writeFile.ts)
-1. all from [client](#client)
