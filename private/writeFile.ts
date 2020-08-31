@@ -1,9 +1,9 @@
 import fs from 'fs';
 
-function writeFile (path: Buffer | URL | string, data: any, encoding: BufferEncoding = 'utf-8'): void {
-  const writableStream = fs.createWriteStream(path, { encoding, });
-
-  writableStream.end(data);
+function writeFile (path: Buffer | URL | string, data: string, encoding: BufferEncoding = 'utf-8'): Promise<string> {
+  return new Promise(($, $$) => {
+    fs.writeFile(path, data, { encoding, }, (error) => error ? $$(error) : $(data));
+  });
 }
 
 export default writeFile;
