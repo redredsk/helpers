@@ -3,7 +3,6 @@
 
 ## client
 
-1. [InputValidationError](private/types/InputValidationError.ts)
 1. [ServerRequest](private/ServerRequest.ts)
 1. [ServerResponse](private/ServerResponse.ts)
 1. [ServerResponseError](private/ServerResponseError.ts)

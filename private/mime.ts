@@ -4,7 +4,7 @@ interface Type {
 }
 
 interface Types {
-  [typeName: string]: Type;
+  [name: string]: Type;
 }
 
 const types: Types = {
@@ -17,6 +17,9 @@ const types: Types = {
   },
   'font/otf': {
     extensions: [ '.otf', ],
+  },
+  'image/jpeg': {
+    extensions: [ '.jpeg', ],
   },
   'image/png': {
     extensions: [ '.png', ],
@@ -32,24 +35,26 @@ const types: Types = {
     charset: 'utf-8',
     extensions: [ '.html', ],
   },
+  'video/mp4': {
+    extensions: [ '.mp4', ],
+  },
+  'video/quicktime': {
+    extensions: [ '.mov', ],
+  },
 };
 
-function mime (extension: string): Type & { typeName: string; } {
-  for (const typeName in types) {
-    const type = types[typeName];
+function mime (extension: string): Type & { name: string; } {
+  for (const name in types) {
+    const type = types[name];
 
-    const typeExtensions = type.extensions;
-
-    for (let i = 0; i < typeExtensions.length; i += 1) {
-      const typeExtension = typeExtensions[i];
-
-      if (typeExtension === extension) {
-        return { ...type, typeName, };
+    for (const i in type.extensions) {
+      if (type.extensions[i] === extension) {
+        return { ...type, name, };
       }
     }
   }
 
-  return { extensions: [ extension, ], typeName: 'text/plain', };
+  return { extensions: [ extension, ], name: 'text/plain', };
 }
 
 export default mime;
