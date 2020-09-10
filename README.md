@@ -17,10 +17,3 @@
 1. [mime](private/mime.ts)
 1. [uuid](private/uuid.ts)
 1. [validateInput](private/types/validateInput.ts)
-
----
-
-## server
-
-1. [readFile](private/readFile.ts)
-1. [writeFile](private/writeFile.ts)
