@@ -15,5 +15,4 @@
 1. [isString](private/types/isString.ts)
 1. [isUndefined](private/types/isUndefined.ts)
 1. [mime](private/mime.ts)
-1. [uuid](private/uuid.ts)
 1. [validateInput](private/types/validateInput.ts)
