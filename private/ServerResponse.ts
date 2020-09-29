@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 Marek Kobida
+ */
+
 import * as t from 'io-ts';
 
 import validateInput from './types/validateInput';

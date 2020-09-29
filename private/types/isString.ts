@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 Marek Kobida
+ */
+
 function isString ($: any): $ is string {
   return typeof $ === 'string' || Object.prototype.toString.call($) === '[object String]';
 }

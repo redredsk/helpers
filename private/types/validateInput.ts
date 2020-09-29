@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 Marek Kobida
+ */
+
 import { isLeft, } from 'fp-ts/lib/Either';
 import * as t from 'io-ts';
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 Marek Kobida
+ */
+
 import ServerResponse from './ServerResponse';
 
 class ServerResponseError extends Error {

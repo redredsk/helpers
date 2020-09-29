@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 Marek Kobida
+ */
+
 import ServerRequestError from './ServerRequestError';
 import ServerResponse from './ServerResponse';
 import ServerResponseError from './ServerResponseError';
