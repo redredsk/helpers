@@ -2,7 +2,7 @@
  * Copyright 2020 Marek Kobida
  */
 
-class MIME {
+export class MIME {
   constructor (readonly bytes: number[], readonly fileExtensions: string[], readonly name: string, readonly offset: number = 0) {}
 
   firstFileExtension = (): string => this.fileExtensions[0];

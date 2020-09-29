@@ -2,9 +2,9 @@
  * Copyright 2020 Marek Kobida
  */
 
-import mime from './mime';
+import mime, { MIME, } from './mime';
 
-function mimeFromFileExtension (fileExtension: string) {
+function mimeFromFileExtension (fileExtension: string): MIME[] {
   return mime.filter((MIME) => MIME.hasFileExtension(fileExtension));
 }
 
