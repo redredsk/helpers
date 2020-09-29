@@ -2,11 +2,10 @@
  * Copyright 2020 Marek Kobida
  */
 
-import MIME from './MIME';
-import mimeDatabase from './mimeDatabase';
+import mime from './mime';
 
-function mimeFromBuffer (buffer: Buffer): MIME[] {
-  return mimeDatabase.filter((type) => type.test(buffer));
+function mimeFromBuffer (buffer: Buffer) {
+  return mime.filter((MIME) => MIME.test(buffer));
 }
 
 export default mimeFromBuffer;

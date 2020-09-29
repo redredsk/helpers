@@ -1,8 +1,6 @@
 <h1 align="center">helpers</h1>
 <p align="center">Copyright 2020 Marek Kobida</p>
 
-## client
-
 1. [ServerRequest](private/ServerRequest.ts)
 1. [ServerResponse](private/ServerResponse.ts)
 1. [ServerResponseError](private/ServerResponseError.ts)
