@@ -2,7 +2,7 @@
  * Copyright 2020 Marek Kobida
  */
 
-import MIME from './_MIME';
+import MIME from './MIME';
 
 const ftyp: number[] = [ 0x66, 0x74, 0x79, 0x70, ];
 

@@ -14,5 +14,7 @@
 1. [isObject](private/types/isObject.ts)
 1. [isString](private/types/isString.ts)
 1. [isUndefined](private/types/isUndefined.ts)
-1. [mime](private/mime.ts)
+1. [mimeDatabase](private/mimeDatabase.ts)
+1. [mimeFromBuffer](private/mimeFromBuffer.ts)
+1. [mimeFromFileExtension](private/mimeFromFileExtension.ts)
 1. [validateInput](private/types/validateInput.ts)

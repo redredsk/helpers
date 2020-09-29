@@ -2,7 +2,7 @@
  * Copyright 2020 Marek Kobida
  */
 
-import MIME from './_MIME';
+import MIME from './MIME';
 import mimeDatabase from './mimeDatabase';
 
 function mimeFromBuffer (buffer: Buffer): MIME[] {
