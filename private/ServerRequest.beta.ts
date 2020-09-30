@@ -45,7 +45,7 @@ class ServerRequest {
   }
 
   request (input: string, i: I): Promise<t.TypeOf<typeof i['json']>> {
-    return new Promise(($) => {
+    return new Promise((l, r) => {
       const url = new URL(input, this.url);
 
       if (i.parameters) {
@@ -56,7 +56,9 @@ class ServerRequest {
 
       const request = new XMLHttpRequest();
 
-      request.addEventListener('load', () => $(validateInput(i.json, request.response)));
+      request.addEventListener('error', () => r(new Error('error')));
+
+      request.addEventListener('load', () => l(validateInput(i.json, request.response)));
 
       request.addEventListener('progress', (e) => e.lengthComputable && console.log('⬇️', url.href, e.loaded / e.total));
 
