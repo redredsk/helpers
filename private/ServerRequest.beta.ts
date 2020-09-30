@@ -50,7 +50,7 @@ class ServerRequest {
 
       if (i.parameters) {
         for (const parameterName in i.parameters) {
-          url.searchParams.set(parameterName, i.parameters[parameterName]);
+          url.searchParams.set(parameterName, i.parameters[parameterName].toString());
         }
       }
 
