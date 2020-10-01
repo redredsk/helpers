@@ -2,6 +2,8 @@
  * Copyright 2020 Marek Kobida
  */
 
+import http from 'http';
+
 import * as t from 'io-ts';
 
 import validateInput from './types/validateInput';
@@ -50,28 +52,44 @@ class ServerRequest {
 
       if (i.parameters) {
         for (const parameterName in i.parameters) {
-          url.searchParams.set(parameterName, i.parameters[parameterName].toString());
+          url.searchParams.set(parameterName, i.parameters[parameterName]);
         }
       }
 
-      const request = new XMLHttpRequest();
+      if (typeof window !== 'undefined') {
+        const request = new XMLHttpRequest();
 
-      request.addEventListener('error', () => r(new Error('error')));
+        request.addEventListener('error', () => r(new Error('error')));
 
-      request.addEventListener('load', () => l(validateInput(i.json, request.response)));
+        request.addEventListener('load', () => l(validateInput(i.json, request.response)));
 
-      request.addEventListener('progress', (e) => e.lengthComputable && console.log('⬇️', url.href, e.loaded / e.total));
+        request.addEventListener('progress', (e) => e.lengthComputable && console.log('⬇️', i.method, url.href, e.loaded / e.total));
 
-      request.upload.addEventListener('progress', (e) => e.lengthComputable && console.log('⬆️️', url.href, e.loaded / e.total));
+        request.upload.addEventListener('progress', (e) => e.lengthComputable && console.log('⬆️️', i.method, url.href, e.loaded / e.total));
 
-      request.responseType = 'json';
+        request.responseType = 'json';
 
-      request.open(i.method, url.toString());
+        request.open(i.method, url.toString());
+
+        if (i.body) {
+          request.send(i.body);
+        } else {
+          request.send();
+        }
+
+        return;
+      }
+
+      console.log('⬇️', i.method, url.href);
+
+      const request = http.request(url.toString(), { method: i.method, }, (response) => {
+        response.on('data', (data) => l(validateInput(i.json, JSON.parse(data))));
+      });
 
       if (i.body) {
-        request.send(i.body);
+        request.end(i.body);
       } else {
-        request.send();
+        request.end();
       }
     });
   }
