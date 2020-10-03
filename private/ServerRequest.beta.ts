@@ -4,13 +4,8 @@
 
 import http from 'http';
 
-import * as t from 'io-ts';
-
-import validateInput from './types/validateInput';
-
 interface I {
   body?: string;
-  json: t.Any;
   method: string;
   parameters?: Record<string, boolean | string>;
 }
@@ -46,7 +41,7 @@ class ServerRequest {
     return this.request(input, { ...i, method: 'PUT', });
   }
 
-  request (input: string, i: I): Promise<t.TypeOf<typeof i['json']>> {
+  request (input: string, i: I): Promise<any> {
     return new Promise((l, r) => {
       const url = new URL(input, this.url);
 
@@ -61,13 +56,7 @@ class ServerRequest {
 
         request.addEventListener('error', () => r(new Error('error')));
 
-        request.addEventListener('load', () => {
-          try {
-            l(validateInput(i.json, request.response));
-          } catch (error) {
-            r(error);
-          }
-        });
+        request.addEventListener('load', () => l(request.response));
 
         request.addEventListener('progress', (e) => e.lengthComputable && console.log('⬇️', i.method, url.href, e.loaded / e.total));
 
@@ -89,13 +78,7 @@ class ServerRequest {
       console.log('⬇️', i.method, url.href);
 
       const request = http.request(url.toString(), { method: i.method, }, (response) => {
-        response.on('data', (data) => {
-          try {
-            l(validateInput(i.json, JSON.parse(data)));
-          } catch (error) {
-            r(error);
-          }
-        });
+        response.on('data', (data) => l(JSON.parse(data)));
       });
 
       if (i.body) {
