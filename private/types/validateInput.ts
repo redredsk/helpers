@@ -9,7 +9,7 @@ function validateInput<InputType extends t.Any> (inputType: InputType, input: t.
   const $ = inputType.decode(input);
 
   if (isLeft($)) {
-    throw new Error('The input is not valid.');
+    throw new Error(`The input is not valid (${inputType.name}).`);
   }
 
   return $.right;

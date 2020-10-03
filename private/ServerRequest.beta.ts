@@ -61,7 +61,13 @@ class ServerRequest {
 
         request.addEventListener('error', () => r(new Error('error')));
 
-        request.addEventListener('load', () => l(validateInput(i.json, request.response)));
+        request.addEventListener('load', () => {
+          try {
+            l(validateInput(i.json, request.response));
+          } catch (error) {
+            r(error);
+          }
+        });
 
         request.addEventListener('progress', (e) => e.lengthComputable && console.log('⬇️', i.method, url.href, e.loaded / e.total));
 
@@ -83,7 +89,13 @@ class ServerRequest {
       console.log('⬇️', i.method, url.href);
 
       const request = http.request(url.toString(), { method: i.method, }, (response) => {
-        response.on('data', (data) => l(validateInput(i.json, JSON.parse(data))));
+        response.on('data', (data) => {
+          try {
+            l(validateInput(i.json, JSON.parse(data)));
+          } catch (error) {
+            r(error);
+          }
+        });
       });
 
       if (i.body) {
