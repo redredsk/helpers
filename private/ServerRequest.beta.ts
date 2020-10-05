@@ -11,33 +11,33 @@ interface I {
 }
 
 class ServerRequest {
-  constructor (readonly testParameters: Record<string, string>, readonly url: string) {}
+  constructor (readonly parameters: I['parameters'], readonly url: string) {}
 
-  delete (input: string, i: Omit<I, 'method'>) {
+  delete (input: string, i?: Omit<I, 'method'>) {
     return this.request(input, { ...i, method: 'DELETE', });
   }
 
-  get (input: string, i: Omit<I, 'method'>) {
+  get (input: string, i?: Omit<I, 'method'>) {
     return this.request(input, { ...i, method: 'GET', });
   }
 
-  head (input: string, i: Omit<I, 'method'>) {
+  head (input: string, i?: Omit<I, 'method'>) {
     return this.request(input, { ...i, method: 'HEAD', });
   }
 
-  options (input: string, i: Omit<I, 'method'>) {
+  options (input: string, i?: Omit<I, 'method'>) {
     return this.request(input, { ...i, method: 'OPTIONS', });
   }
 
-  patch (input: string, i: Omit<I, 'method'>) {
+  patch (input: string, i?: Omit<I, 'method'>) {
     return this.request(input, { ...i, method: 'PATCH', });
   }
 
-  post (input: string, i: Omit<I, 'method'>) {
+  post (input: string, i?: Omit<I, 'method'>) {
     return this.request(input, { ...i, method: 'POST', });
   }
 
-  put (input: string, i: Omit<I, 'method'>) {
+  put (input: string, i?: Omit<I, 'method'>) {
     return this.request(input, { ...i, method: 'PUT', });
   }
 
@@ -45,10 +45,10 @@ class ServerRequest {
     return new Promise((l, r) => {
       const url = new URL(input, this.url);
 
-      if (i.parameters) {
-        for (const parameterName in i.parameters) {
-          url.searchParams.set(parameterName, i.parameters[parameterName]);
-        }
+      const parameters = { ...i.parameters, ...this.parameters, };
+
+      for (const parameterName in parameters) {
+        url.searchParams.set(parameterName, parameters[parameterName]);
       }
 
       if (typeof window !== 'undefined') {
@@ -75,7 +75,7 @@ class ServerRequest {
         return;
       }
 
-      console.log('⬇️', i.method, url.href);
+      console.trace('⬇️', i.method, url.href, this.constructor.name);
 
       const request = http.request(url.toString(), { method: i.method, }, (response) => {
         response.on('data', (data) => l(JSON.parse(data)));
