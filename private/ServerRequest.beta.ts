@@ -11,7 +11,7 @@ interface I {
 }
 
 class ServerRequest {
-  constructor (readonly url: string) {}
+  constructor (readonly testParameters: Record<string, string>, readonly url: string) {}
 
   delete (input: string, i: Omit<I, 'method'>) {
     return this.request(input, { ...i, method: 'DELETE', });
