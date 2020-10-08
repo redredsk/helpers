@@ -7,7 +7,7 @@ import http from 'http';
 interface I {
   body?: string;
   method: string;
-  parameters?: Record<string, boolean | string>;
+  parameters?: Record<string, unknown>;
 }
 
 class ServerRequest {
@@ -54,7 +54,7 @@ class ServerRequest {
       if (typeof window !== 'undefined') {
         const request = new XMLHttpRequest();
 
-        request.addEventListener('error', () => r(new Error('error')));
+        request.addEventListener('error', () => r(new Error('The response is not valid.')));
 
         request.addEventListener('load', () => l(request.response));
 
