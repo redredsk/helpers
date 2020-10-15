@@ -5,7 +5,6 @@
 import ServerRequestError from './ServerRequestError';
 import ServerResponse from './ServerResponse';
 import ServerResponseError from './ServerResponseError';
-import isString from './types/isString';
 
 declare global {
   interface RequestInit {
@@ -65,7 +64,7 @@ class ServerRequest {
   }
 
   private test (input: RequestInfo, init: RequestInit = {}): RequestInfo {
-    if (isString(input)) {
+    if (typeof input === 'string') {
       const url = new URL(input, this.url);
 
       if (init.parameters) {

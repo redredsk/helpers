@@ -4,7 +4,9 @@
 
 import * as t from 'io-ts';
 
-import validateInput from './types/validateInput';
+import Validation from './types/Validation';
+
+const validation = new Validation();
 
 class ServerResponse {
   readonly headers: Response['headers'];
@@ -46,7 +48,7 @@ class ServerResponse {
   }
 
   async json<Type extends t.Any> (type: Type): Promise<t.TypeOf<Type>> {
-    return validateInput(type, await this.response.json());
+    return validation.validateInput(type, await this.response.json());
   }
 
   text () {
