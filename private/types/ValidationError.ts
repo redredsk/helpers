@@ -10,7 +10,7 @@ class ValidationError<Validation> extends Error {
   constructor (message: string, validation: t.Validation<Validation>) {
     super(message);
 
-    function getContextPath (context): string {
+    function getContextPath (context: t.Context): string {
       return context.map(({ key, type, }, i) => `     ${i + 1}. ${key ? `${key} : ` : ''}${type.name}`).join('\n');
     }
 
