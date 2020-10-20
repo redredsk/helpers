@@ -9,14 +9,14 @@ import ValidationError from './ValidationError';
 
 class Validation {
   createInputOutputValidator <I extends t.Any, O extends t.Any> (afterValidationFunction: (validatedInput: t.TypeOf<I>) => Promise<t.TypeOf<O>>, inputType: I, outputType: O): (input: t.TypeOf<I>) => Promise<t.TypeOf<O>> {
-    return async (input) => this.validateInput(outputType, await afterValidationFunction(this.validateInput(inputType, input)));
+    return async (input) => this.validateInput(await afterValidationFunction(this.validateInput(input, inputType)), outputType);
   }
 
   createOutputValidator <O extends t.Any> (afterValidationFunction: () => Promise<t.TypeOf<O>>, outputType: O): () => Promise<t.TypeOf<O>> {
-    return async () => this.validateInput(outputType, await afterValidationFunction());
+    return async () => this.validateInput(await afterValidationFunction(), outputType);
   }
 
-  validateInput <I extends t.Any> (inputType: I, input: t.OutputOf<I>): t.TypeOf<I> {
+  validateInput <I extends t.Any> (input: t.OutputOf<I>, inputType: I): t.TypeOf<I> {
     const validation = inputType.decode(input);
 
     if (isLeft(validation)) {

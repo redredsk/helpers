@@ -48,7 +48,7 @@ class ServerResponse {
   }
 
   async json<Type extends t.Any> (type: Type): Promise<t.TypeOf<Type>> {
-    return validation.validateInput(type, await this.response.json());
+    return validation.validateInput(await this.response.json(), type);
   }
 
   text () {
