@@ -5,7 +5,7 @@
 import http from 'http';
 
 // https://nodejs.org/api/http.html#http_class_http_incomingmessage
-function jsonFromHttpServerRequest<T> (request: http.IncomingMessage): Promise<T> {
+function jsonFromHttpServerRequest (request: http.IncomingMessage): Promise<any> {
   return new Promise((l, r) => {
     const chunks: Buffer[] = [];
 
