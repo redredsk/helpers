@@ -15,7 +15,7 @@ interface I {
 class HttpClient {
   readonly validation = new Validation();
 
-  constructor (readonly parameters: I['parameters'], readonly url: string) {}
+  constructor (readonly urlSearchParameters: I['parameters'], readonly url: string) {}
 
   delete (url: string, i?: Omit<I, 'method'>) {
     return this.request(url, { ...i, method: 'DELETE', });
@@ -49,7 +49,7 @@ class HttpClient {
     return new Promise((l, r) => {
       const url = new URL(input, this.url);
 
-      const parameters = { ...i.parameters, ...this.parameters, };
+      const parameters = { ...i.parameters, ...this.urlSearchParameters, };
 
       for (const parameterName in parameters) {
         url.searchParams.set(parameterName, parameters[parameterName]);

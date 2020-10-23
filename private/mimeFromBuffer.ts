@@ -4,8 +4,8 @@
 
 import mime, { MIME, } from './mime';
 
-function mimeFromBuffer (buffer: Buffer): MIME[] {
-  return mime.filter((MIME) => MIME.test(buffer));
+function mimeFromBuffer (buffer: Buffer): MIME | undefined {
+  return mime.find((MIME) => MIME.test(buffer));
 }
 
 export default mimeFromBuffer;
