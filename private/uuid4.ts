@@ -20,7 +20,7 @@ import crypto from 'crypto';
  *                       0000 1001 1110 = 0x9E (158) OR
  *  ```
  */
-function uuid (): string {
+function uuid4 (): string {
   const bytes: Uint8Array = crypto.randomFillSync(new Uint8Array(16));
 
   bytes[6] = (bytes[6] & 0x0f) | 0x40;
@@ -41,4 +41,4 @@ function uuid (): string {
   ].join('');
 }
 
-export default uuid;
+export default uuid4;
