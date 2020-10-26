@@ -8,7 +8,7 @@ import * as t from 'io-ts';
 import ValidationError from './ValidationError';
 
 class Validation {
-  createInputOutputValidator <I extends t.Any, O extends t.Any> (afterValidationFunction: (validatedInput: t.TypeOf<I>) => Promise<t.TypeOf<O>>, inputType: I, outputType: O): (input: t.TypeOf<I>) => Promise<t.TypeOf<O>> {
+  createInputOutputValidator <I extends t.Any, O extends t.Any> (afterValidationFunction: (validatedInput: t.TypeOf<I>) => Promise<t.TypeOf<O>>, inputType: I, outputType: O): (input: t.OutputOf<I>) => Promise<t.TypeOf<O>> {
     return async (input) => this.validateInput(await afterValidationFunction(this.validateInput(input, inputType)), outputType);
   }
 
