@@ -17,7 +17,7 @@ function jsonFromHttpServerRequest (request: http.IncomingMessage): Promise<any>
       if (chunks.length > 0) {
         l(JSON.parse(Buffer.concat(chunks).toString()));
       } else {
-        l(null);
+        l(undefined);
       }
     });
 
