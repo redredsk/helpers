@@ -2,8 +2,6 @@
  * Copyright 2020 Marek Kobida
  */
 
-import http from 'http';
-
 import Validation from './types/Validation';
 
 interface I {
@@ -66,6 +64,8 @@ class HttpClient {
       }
 
       // 2.
+
+      const http = require('http');
 
       const request = http.request(url.toString(), { method: i.method, }, (response) => {
         response.on('data', (data) => l(JSON.parse(data)));
