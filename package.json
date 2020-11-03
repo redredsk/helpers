@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "fp-ts": "^2.8.4",
-    "io-ts": "^2.2.11"
+    "fp-ts": "^2.8.5",
+    "io-ts": "^2.2.12"
   },
   "name": "@redredsk/helpers",
   "version": "1.0.0"
