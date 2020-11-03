@@ -9,7 +9,21 @@ interface T {
 }
 
 class FileType {
+  #ftyp: T['bytes'] = [0x66, 0x74, 0x79, 0x70];
+
   fileTypes: T[] = [
+    {
+      byteOffset: 4,
+      bytes: [...this.#ftyp, 0x68, 0x65, 0x69, 0x63],
+      fileExtensions: ['.heic'],
+      mime: 'image/heic',
+    },
+    {
+      byteOffset: 4,
+      bytes: [...this.#ftyp, 0x68, 0x65, 0x69, 0x66],
+      fileExtensions: ['.heif'],
+      mime: 'image/heif',
+    },
     {
       bytes: [ 0xFF, 0xD8, 0xFF, ],
       fileExtensions: [ '.jpeg', ],
