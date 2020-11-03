@@ -19,12 +19,6 @@ class FileType {
       mime: 'image/heic',
     },
     {
-      byteOffset: 4,
-      bytes: [...this.#ftyp, 0x68, 0x65, 0x69, 0x66],
-      fileExtensions: ['.heif'],
-      mime: 'image/heif',
-    },
-    {
       bytes: [ 0xFF, 0xD8, 0xFF, ],
       fileExtensions: [ '.jpeg', ],
       mime: 'image/jpeg',
