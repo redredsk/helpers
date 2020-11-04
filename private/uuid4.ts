@@ -20,13 +20,15 @@ import crypto from 'crypto';
  *                       0000 1001 1110 = 0x9E (158) OR
  *  ```
  */
-function uuid4 (): string {
+function uuid4(): string {
   const bytes: Uint8Array = crypto.randomFillSync(new Uint8Array(16));
 
   bytes[6] = (bytes[6] & 0x0f) | 0x40;
   bytes[8] = (bytes[8] & 0x3f) | 0x80;
 
-  const $: string[] = [ ...bytes, ].map((byte: number): string => byte.toString(16).padStart(2, '0'));
+  const $: string[] = [...bytes].map((byte: number): string =>
+    byte.toString(16).padStart(2, '0'),
+  );
 
   return [
     ...$.slice(0, 4),

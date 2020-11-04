@@ -8,6 +8,7 @@ import Validation from './types/Validation';
 
 const validation = new Validation();
 
+/** @deprecated */
 class ServerResponse {
   readonly headers: Response['headers'];
 
@@ -21,7 +22,7 @@ class ServerResponse {
 
   readonly url: Response['url'];
 
-  constructor (response: Response) {
+  constructor(response: Response) {
     this.headers = response.headers;
 
     this.response = response;
@@ -35,23 +36,23 @@ class ServerResponse {
     this.url = response.url;
   }
 
-  arrayBuffer () {
+  arrayBuffer() {
     return this.response.arrayBuffer();
   }
 
-  blob () {
+  blob() {
     return this.response.blob();
   }
 
-  formData () {
+  formData() {
     return this.response.formData();
   }
 
-  async json<Type extends t.Any> (type: Type): Promise<t.TypeOf<Type>> {
+  async json<Type extends t.Any>(type: Type): Promise<t.TypeOf<Type>> {
     return validation.validateInput(await this.response.json(), type);
   }
 
-  text () {
+  text() {
     return this.response.text();
   }
 }

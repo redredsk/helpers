@@ -3,6 +3,7 @@
  */
 
 interface T {
+  byteOffset: number;
   bytes: number[];
   fileExtensions: string[];
   mime: string;
@@ -19,28 +20,38 @@ class FileType {
       mime: 'image/heic',
     },
     {
-      bytes: [ 0xFF, 0xD8, 0xFF, ],
-      fileExtensions: [ '.jpeg', ],
+      byteOffset: 0,
+      bytes: [0xff, 0xd8, 0xff],
+      fileExtensions: ['.jpeg'],
       mime: 'image/jpeg',
     },
     {
-      bytes: [ 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6F, 0x6D, ],
-      fileExtensions: [ '.mp4', ],
+      byteOffset: 4,
+      bytes: [...this.#ftyp, 0x69, 0x73, 0x6f, 0x6d],
+      fileExtensions: ['.mp4'],
       mime: 'video/mp4',
     },
     {
-      bytes: [ 0x66, 0x74, 0x79, 0x70, 0x71, 0x74, ],
-      fileExtensions: [ '.mov', ],
+      byteOffset: 4,
+      bytes: [...this.#ftyp, 0x71, 0x74],
+      fileExtensions: ['.mov'],
       mime: 'video/quicktime',
     },
-  ]
+  ];
 
-  fromBuffer (buffer: Buffer): T | undefined {
-    return this.fileTypes.find((fileType) => fileType.bytes.findIndex((byte, i) => byte !== buffer[i]) === -1);
+  fromBuffer(buffer: Buffer): T | undefined {
+    return this.fileTypes.find(
+      fileType =>
+        fileType.bytes.findIndex(
+          (byte, i) => byte !== buffer[fileType.byteOffset + i],
+        ) === -1,
+    );
   }
 
-  fromFileExtension (fileExtension: string): T | undefined {
-    return this.fileTypes.find((fileType) => fileType.fileExtensions.includes(fileExtension));
+  fromFileExtension(fileExtension: string): T | undefined {
+    return this.fileTypes.find(fileType =>
+      fileType.fileExtensions.includes(fileExtension),
+    );
   }
 }
 

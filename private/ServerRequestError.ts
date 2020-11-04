@@ -2,8 +2,9 @@
  * Copyright 2020 Marek Kobida
  */
 
+/** @deprecated */
 class ServerRequestError extends Error {
-  constructor () {
+  constructor() {
     super('The request is not valid.');
 
     this.name = 'ServerRequestError';

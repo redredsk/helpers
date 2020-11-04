@@ -12,47 +12,60 @@ declare global {
   }
 }
 
+/** @deprecated */
 class ServerRequest {
   readonly url: string;
 
-  constructor (url: string) {
+  constructor(url: string) {
     this.url = url;
   }
 
-  delete (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
-    return this.request(input, { ...init, method: 'DELETE', });
+  delete(input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
+    return this.request(input, { ...init, method: 'DELETE' });
   }
 
-  get (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
-    return this.request(input, { ...init, method: 'GET', });
+  get(input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
+    return this.request(input, { ...init, method: 'GET' });
   }
 
-  head (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
-    return this.request(input, { ...init, method: 'HEAD', });
+  head(input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
+    return this.request(input, { ...init, method: 'HEAD' });
   }
 
-  options (input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
-    return this.request(input, { ...init, method: 'OPTIONS', });
+  options(input: RequestInfo, init: Omit<RequestInit, 'method'> = {}) {
+    return this.request(input, { ...init, method: 'OPTIONS' });
   }
 
-  patch (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}) {
-    return this.request(input, { ...init, body, method: 'PATCH', });
+  patch(
+    input: RequestInfo,
+    body: RequestInit['body'],
+    init: Omit<RequestInit, 'body' | 'method'> = {},
+  ) {
+    return this.request(input, { ...init, body, method: 'PATCH' });
   }
 
-  post (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}) {
-    return this.request(input, { ...init, body, method: 'POST', });
+  post(
+    input: RequestInfo,
+    body: RequestInit['body'],
+    init: Omit<RequestInit, 'body' | 'method'> = {},
+  ) {
+    return this.request(input, { ...init, body, method: 'POST' });
   }
 
-  put (input: RequestInfo, body: RequestInit['body'], init: Omit<RequestInit, 'body' | 'method'> = {}) {
-    return this.request(input, { ...init, body, method: 'PUT', });
+  put(
+    input: RequestInfo,
+    body: RequestInit['body'],
+    init: Omit<RequestInit, 'body' | 'method'> = {},
+  ) {
+    return this.request(input, { ...init, body, method: 'PUT' });
   }
 
-  request (input: RequestInfo, init: RequestInit = {}): Promise<ServerResponse> {
+  request(input: RequestInfo, init: RequestInit = {}): Promise<ServerResponse> {
     return new Promise(($, $$) => {
       input = this.test(input, init);
 
       fetch(input, init)
-        .then((response) => {
+        .then(response => {
           if (!response.ok) {
             $$(new ServerResponseError(new ServerResponse(response)));
           }
@@ -63,7 +76,7 @@ class ServerRequest {
     });
   }
 
-  private test (input: RequestInfo, init: RequestInit = {}): RequestInfo {
+  private test(input: RequestInfo, init: RequestInit = {}): RequestInfo {
     if (typeof input === 'string') {
       const url = new URL(input, this.url);
 
