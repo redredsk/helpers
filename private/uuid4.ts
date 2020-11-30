@@ -27,7 +27,7 @@ function uuid4(): string {
   bytes[8] = (bytes[8] & 0x3f) | 0x80;
 
   const $: string[] = [...bytes].map((byte: number): string =>
-    byte.toString(16).padStart(2, '0'),
+    byte.toString(16).padStart(2, '0')
   );
 
   return [

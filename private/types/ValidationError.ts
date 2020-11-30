@@ -17,11 +17,11 @@ class ValidationError<Validation extends t.Validation<t.Any>> extends Error {
           errors.map(
             validationError =>
               `${typeof validationError.value}\n${this.validationErrorContextToString(
-                validationError.context,
-              )}`,
+                validationError.context
+              )}`
           ),
-        () => [],
-      ),
+        () => []
+      )
     );
 
     messages.forEach(message => (this.message += `\n- ${message}`));

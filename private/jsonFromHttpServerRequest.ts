@@ -8,7 +8,7 @@ type T = Array<T> | boolean | null | number | string | { [l: string]: T };
 
 // https://nodejs.org/api/http.html#http_class_http_incomingmessage
 function jsonFromHttpServerRequest(
-  request: http.IncomingMessage,
+  request: http.IncomingMessage
 ): Promise<T | undefined> {
   return new Promise((l, r) => {
     const chunks: Buffer[] = [];

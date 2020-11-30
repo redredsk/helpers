@@ -15,7 +15,7 @@ class HttpClient {
 
   constructor(
     readonly urlSearchParameters: I['parameters'],
-    readonly url: string,
+    readonly url: string
   ) {}
 
   delete(url: string, i?: Omit<I, 'method'>) {
@@ -76,7 +76,7 @@ class HttpClient {
         response => {
           response.on('data', data => l(JSON.parse(data)));
           response.on('error', error => r(error));
-        },
+        }
       );
 
       if (i.body) {

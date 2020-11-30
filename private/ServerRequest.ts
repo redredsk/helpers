@@ -39,7 +39,7 @@ class ServerRequest {
   patch(
     input: RequestInfo,
     body: RequestInit['body'],
-    init: Omit<RequestInit, 'body' | 'method'> = {},
+    init: Omit<RequestInit, 'body' | 'method'> = {}
   ) {
     return this.request(input, { ...init, body, method: 'PATCH' });
   }
@@ -47,7 +47,7 @@ class ServerRequest {
   post(
     input: RequestInfo,
     body: RequestInit['body'],
-    init: Omit<RequestInit, 'body' | 'method'> = {},
+    init: Omit<RequestInit, 'body' | 'method'> = {}
   ) {
     return this.request(input, { ...init, body, method: 'POST' });
   }
@@ -55,7 +55,7 @@ class ServerRequest {
   put(
     input: RequestInfo,
     body: RequestInit['body'],
-    init: Omit<RequestInit, 'body' | 'method'> = {},
+    init: Omit<RequestInit, 'body' | 'method'> = {}
   ) {
     return this.request(input, { ...init, body, method: 'PUT' });
   }

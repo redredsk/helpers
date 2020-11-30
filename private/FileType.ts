@@ -43,14 +43,14 @@ class FileType {
     return this.fileTypes.find(
       fileType =>
         fileType.bytes.findIndex(
-          (byte, i) => byte !== buffer[fileType.byteOffset + i],
-        ) === -1,
+          (byte, i) => byte !== buffer[fileType.byteOffset + i]
+        ) === -1
     );
   }
 
   fromFileExtension(fileExtension: string): T | undefined {
     return this.fileTypes.find(fileType =>
-      fileType.fileExtensions.includes(fileExtension),
+      fileType.fileExtensions.includes(fileExtension)
     );
   }
 }
